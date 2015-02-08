@@ -1,6 +1,6 @@
 # SimpleDSL
 
-Decision Tree algorithm implementation, for Node.js and browser.
+Simple DSL (Domain-Specific Language) helper implementation, in JavaScript/Node.js.
 
 ## Installation
 
