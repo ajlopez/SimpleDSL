@@ -20,3 +20,16 @@ exports['Register and execute verb'] = function (test) {
         test.done();
     });
 }
+
+exports['Register and execute verb with spaces'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+    
+    dsl.register('foo', function (cmd, cb) { cb(null, 1); });
+    dsl.execute('  foo   ', function (err, data) {
+        test.equal(err, null);
+        test.equal(data, 1);
+        test.done();
+    });
+}
