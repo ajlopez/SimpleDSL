@@ -145,3 +145,42 @@ exports['Receives command with arguments and comment'] = function (test) {
     });
 }
 
+exports['Execute two commands in two lines'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+    
+    var counter = 0;
+    
+    dsl.register('foo', function (cmd, cb) { 
+        test.ok(cmd);
+        test.ok(cmd.verb);
+        test.equal(cmd.verb, 'foo');
+        test.ok(cmd.args);
+        test.equal(cmd.args.length, 2);
+        test.equal(cmd.args[0], 'arg1');
+        test.equal(cmd.args[1], 'arg2');
+        counter++;
+        cb(null, counter); 
+    });
+    
+    dsl.register('bar', function (cmd, cb) { 
+        test.ok(cmd);
+        test.ok(cmd.verb);
+        test.equal(cmd.verb, 'bar');
+        test.ok(cmd.args);
+        test.equal(cmd.args.length, 2);
+        test.equal(cmd.args[0], 'arg3');
+        test.equal(cmd.args[1], 'arg4');
+        counter++;
+        cb(null, counter); 
+    });
+    
+    dsl.execute('foo arg1 arg2\nbar arg3 arg4', function (err, data) {
+        test.equal(err, null);
+        test.equal(data, 2);
+        test.equal(counter, 2);
+        test.done();
+    });
+}
+
