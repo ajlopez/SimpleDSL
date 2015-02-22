@@ -263,5 +263,15 @@ exports['Execute two commands from file'] = function (test) {
     });
 }
 
+exports['Execute file with only comments'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl({ comment: '#' });
 
+    dsl.executeFile(path.join(__dirname, 'files', 'comments.txt'), function (err, data) {
+        test.equal(err, null);
+        test.equal(data, null);
+        test.done();
+    });
+}
 
