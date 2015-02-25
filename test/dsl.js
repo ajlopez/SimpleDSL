@@ -77,6 +77,32 @@ exports['Receives command with arguments'] = function (test) {
     });
 }
 
+exports['Logs command with arguments'] = function (test) {
+    test.async();
+    
+    var log = '';
+    
+    var dsl = sdsl.dsl({ log: function (text) { log += text + '\n'; }});
+    
+    dsl.register('foo', function (cmd, cb) { 
+        test.ok(cmd);
+        test.ok(cmd.verb);
+        test.equal(cmd.verb, 'foo');
+        test.ok(cmd.args);
+        test.equal(cmd.args.length, 2);
+        test.equal(cmd.args[0], 'arg1');
+        test.equal(cmd.args[1], 'arg2');
+        cb(null, 1); 
+    });
+    
+    dsl.execute('foo arg1 arg2', function (err, data) {
+        test.equal(err, null);
+        test.equal(data, 1);
+        test.equal(log, 'foo arg1 arg2\n');
+        test.done();
+    });
+}
+
 exports['Receives command with arguments and spaces'] = function (test) {
     test.async();
     
