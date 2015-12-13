@@ -77,6 +77,28 @@ exports['Receives command with arguments'] = function (test) {
     });
 }
 
+exports['Receives command with JSON argument'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl({ delimiter: ';' });
+    
+    dsl.register('foo', function (cmd, cb) { 
+        test.ok(cmd);
+        test.ok(cmd.verb);
+        test.equal(cmd.verb, 'foo');
+        test.ok(cmd.args);
+        test.equal(cmd.args.length, 1);
+        test.deepEqual(cmd.args[0], { name: 'Adam', age: 800 });
+        cb(null, 1); 
+    });
+    
+    dsl.execute('foo { name: "Adam", age: 800 }', function (err, data) {
+        test.equal(err, null);
+        test.equal(data, 1);
+        test.done();
+    });
+}
+
 exports['Logs command with arguments'] = function (test) {
     test.async();
     
