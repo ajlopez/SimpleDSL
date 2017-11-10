@@ -42,8 +42,8 @@ exports['Receives command with verb'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
         cb(null, 1); 
     });
     
@@ -61,12 +61,12 @@ exports['Receives command with arguments'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         cb(null, 1); 
     });
     
@@ -84,14 +84,14 @@ exports['Receives command with arguments and additional data'] = function (test)
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
-		test.equal(cmd.text, 'foo arg1 arg2');
-		test.equal(cmd.argstext, 'arg1 arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
+		test.equal(cmd.text(), 'foo arg1 arg2');
+		test.equal(cmd.argumentsText(), 'arg1 arg2');
         cb(null, 1); 
     });
     
@@ -109,12 +109,12 @@ exports['Receives command with arguments and tabs'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         cb(null, 1); 
     });
     
@@ -132,11 +132,11 @@ exports['Receives command with JSON argument'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 1);
-        test.deepEqual(cmd.args[0], { name: 'Adam', age: 800 });
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 1);
+        test.deepEqual(cmd.arguments()[0], { name: 'Adam', age: 800 });
         cb(null, 1); 
     });
     
@@ -156,12 +156,12 @@ exports['Logs command with arguments'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         cb(null, 1); 
     });
     
@@ -180,12 +180,12 @@ exports['Receives command with arguments and spaces'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         cb(null, 1); 
     });
     
@@ -203,12 +203,12 @@ exports['Receives command with arguments and delimiter'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         cb(null, 1); 
     });
     
@@ -226,12 +226,12 @@ exports['Receives command with arguments and comment'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         cb(null, 1); 
     });
     
@@ -251,24 +251,24 @@ exports['Execute two commands in two lines'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         counter++;
         cb(null, counter); 
     });
     
     dsl.register('bar', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'bar');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg3');
-        test.equal(cmd.args[1], 'arg4');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'bar');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg3');
+        test.equal(cmd.arguments()[1], 'arg4');
         counter++;
         cb(null, counter); 
     });
@@ -290,12 +290,12 @@ exports['Execute two commands in three lines'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         counter++;
         cb(null, counter); 
     });
@@ -303,11 +303,11 @@ exports['Execute two commands in three lines'] = function (test) {
     dsl.register('bar', function (cmd, cb) { 
         test.ok(cmd);
         test.ok(cmd.verb);
-        test.equal(cmd.verb, 'bar');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg3');
-        test.equal(cmd.args[1], 'arg4');
+        test.equal(cmd.verb(), 'bar');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg3');
+        test.equal(cmd.arguments()[1], 'arg4');
         counter++;
         cb(null, counter); 
     });
@@ -329,24 +329,24 @@ exports['Execute two commands from file'] = function (test) {
     
     dsl.register('foo', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'foo');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg1');
-        test.equal(cmd.args[1], 'arg2');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'foo');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg1');
+        test.equal(cmd.arguments()[1], 'arg2');
         counter++;
         cb(null, counter); 
     });
     
     dsl.register('bar', function (cmd, cb) { 
         test.ok(cmd);
-        test.ok(cmd.verb);
-        test.equal(cmd.verb, 'bar');
-        test.ok(cmd.args);
-        test.equal(cmd.args.length, 2);
-        test.equal(cmd.args[0], 'arg3');
-        test.equal(cmd.args[1], 'arg4');
+        test.ok(cmd.verb());
+        test.equal(cmd.verb(), 'bar');
+        test.ok(cmd.arguments());
+        test.equal(cmd.arguments().length, 2);
+        test.equal(cmd.arguments()[0], 'arg3');
+        test.equal(cmd.arguments()[1], 'arg4');
         counter++;
         cb(null, counter); 
     });
