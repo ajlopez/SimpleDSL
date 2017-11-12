@@ -242,14 +242,15 @@ exports['Receives command with arguments and comment'] = function (test) {
     });
 }
 
-exports['Execute two commands in two lines'] = function (test) {
+exports['Execute two commands in two lines using chaining'] = function (test) {
     test.async();
     
     var dsl = sdsl.dsl();
     
     var counter = 0;
     
-    dsl.define('foo', function (cmd, cb) { 
+    dsl
+	.define('foo', function (cmd, cb) { 
         test.ok(cmd);
         test.ok(cmd.verb());
         test.equal(cmd.verb(), 'foo');
@@ -259,9 +260,8 @@ exports['Execute two commands in two lines'] = function (test) {
         test.equal(cmd.arguments()[1], 'arg2');
         counter++;
         cb(null, counter); 
-    });
-    
-    dsl.define('bar', function (cmd, cb) { 
+    })
+	.define('bar', function (cmd, cb) { 
         test.ok(cmd);
         test.ok(cmd.verb());
         test.equal(cmd.verb(), 'bar');
@@ -271,9 +271,8 @@ exports['Execute two commands in two lines'] = function (test) {
         test.equal(cmd.arguments()[1], 'arg4');
         counter++;
         cb(null, counter); 
-    });
-    
-    dsl.execute('foo arg1 arg2\nbar arg3 arg4', function (err, data) {
+    })
+	.execute('foo arg1 arg2\nbar arg3 arg4', function (err, data) {
         test.equal(err, null);
         test.equal(data, 2);
         test.equal(counter, 2);
