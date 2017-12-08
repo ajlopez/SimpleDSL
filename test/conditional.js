@@ -16,3 +16,19 @@ exports['Define and execute conditional verb returning false'] = function (test)
         test.done();
     });
 }
+
+exports['Define and execute conditional verb returning true'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+    
+    dsl
+		.define('true', function (cmd, cb) { cb(null, true); }, { conditional: true })
+		.define('one', function (cmd, cb) { cb(null, 1); });
+
+	dsl.execute([ 'true', 'one' ], function (err, data) {
+        test.equal(err, null);
+		test.equal(data, 1);
+        test.done();
+    });
+}
