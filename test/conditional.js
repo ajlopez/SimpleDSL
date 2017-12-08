@@ -32,3 +32,22 @@ exports['Define and execute conditional verb returning true'] = function (test) 
         test.done();
     });
 }
+
+exports['Define and execute conditional verb returning false skipping fail'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+    
+    dsl
+		.define('false', function (cmd, cb) { cb(null, false); }, { conditional: true })
+		.define('fail', function (cmd, cb) { test.fail(); })
+		.define('end', function (cmd, cb) { cb(null, null); }, { close: true })
+		.define('one', function (cmd, cb) { cb(null, 1); });
+
+	dsl.execute([ 'false', 'fail', 'end', 'one' ], function (err, data) {
+        test.equal(err, null);
+		test.equal(data, 1);
+        test.done();
+    });
+}
+
