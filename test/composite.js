@@ -10,9 +10,9 @@ exports['Define and execute composite verb returning false'] = function (test) {
     dsl
 		.define('false', function (cmd, cb) { cb(null, false); }, { composite: true })
 		.define('fail', function (cmd, cb) { test.fail(); })
-		.define('close', function (cmd, cb) { }, { close: true });
+		.define('end', { close: true });
 
-	dsl.execute([ 'false', 'fail', 'close' ], function (err, data) {
+	dsl.execute([ 'false', 'fail', 'end' ], function (err, data) {
         test.equal(err, null);
         test.done();
     });
@@ -26,9 +26,9 @@ exports['Define and execute composite verb returning true'] = function (test) {
     dsl
 		.define('true', function (cmd, cb) { cb(null, true); }, { composite: true })
 		.define('one', function (cmd, cb) { cb(null, 1); })
-		.define('close', function (cmd, cb) {}, { close: true });
+		.define('end', { close: true });
 
-	dsl.execute([ 'true', 'one', 'close' ], function (err, data) {
+	dsl.execute([ 'true', 'one', 'end' ], function (err, data) {
         test.equal(err, null);
 		test.equal(data, 1);
         test.done();
@@ -43,7 +43,7 @@ exports['Define and execute composite verb returning false skipping fail'] = fun
     dsl
 		.define('false', function (cmd, cb) { cb(null, false); }, { composite: true })
 		.define('fail', function (cmd, cb) { test.fail(); })
-		.define('end', function (cmd, cb) { cb(null, null); }, { close: true })
+		.define('end', { close: true })
 		.define('one', function (cmd, cb) { cb(null, 1); });
 
 	dsl.execute([ 'false', 'fail', 'end', 'one' ], function (err, data) {
