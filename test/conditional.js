@@ -42,7 +42,7 @@ exports['Define and execute conditional verb returning false skipping fail'] = f
     dsl
 		.define('false', function (cmd, cb) { cb(null, false); }, { conditional: true })
 		.define('fail', function (cmd, cb) { test.fail(); })
-		.define('end', function (cmd, cb) { cb(null, null); }, { close: true })
+		.define('end', { close: true })
 		.define('one', function (cmd, cb) { cb(null, 1); });
 
 	dsl.execute([ 'false', 'fail', 'end', 'one' ], function (err, data) {
