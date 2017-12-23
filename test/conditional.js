@@ -9,9 +9,10 @@ exports['Define and execute conditional verb returning false'] = function (test)
     
     dsl
 		.define('false', function (cmd, cb) { cb(null, false); }, { conditional: true })
-		.define('fail', function (cmd, cb) { test.fail(); });
+		.define('fail', function (cmd, cb) { test.fail(); })
+		.define('end', { close: true });
 
-	dsl.execute([ 'false', 'fail' ], function (err, data) {
+	dsl.execute([ 'false', 'fail', 'end' ], function (err, data) {
         test.equal(err, null);
         test.done();
     });

@@ -9,6 +9,26 @@ exports['Create dsl'] = function (test) {
     test.equal(typeof dsl, 'object');   
 }
 
+exports['Execute unknown verb'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+
+	try {
+		dsl.execute('foo', function (err, data) {
+			test.equal(err, null);
+			test.equal(data, 1);
+			test.done();
+		});
+		
+		test.fail();
+	}
+	catch (ex) {
+		test.equal(ex, 'Error: unknown verb "foo"');
+		test.done();
+	}
+}
+
 exports['Define and execute verb'] = function (test) {
     test.async();
     
