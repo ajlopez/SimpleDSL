@@ -2,13 +2,13 @@
 var sdsl = require('..');
 var path = require('path');
 
-exports['Define and execute composite verb returning false'] = function (test) {
+exports['Define and execute block verb returning false'] = function (test) {
     test.async();
     
     var dsl = sdsl.dsl();
     
     dsl
-		.define('false', function (cmd, cb) { cb(null, false); }, { composite: true })
+		.define('false', function (cmd, cb) { cb(null, false); }, { block: true })
 		.define('fail', function (cmd, cb) { test.fail(); })
 		.define('end', { close: true });
 
@@ -18,13 +18,13 @@ exports['Define and execute composite verb returning false'] = function (test) {
     });
 }
 
-exports['Define and execute composite verb returning true'] = function (test) {
+exports['Define and execute block verb returning true'] = function (test) {
     test.async();
     
     var dsl = sdsl.dsl();
     
     dsl
-		.define('true', function (cmd, cb) { cb(null, true); }, { composite: true })
+		.define('true', function (cmd, cb) { cb(null, true); }, { block: true })
 		.define('one', function (cmd, cb) { cb(null, 1); })
 		.define('end', { close: true });
 
@@ -35,13 +35,13 @@ exports['Define and execute composite verb returning true'] = function (test) {
     });
 }
 
-exports['Define and execute composite verb returning false skipping fail'] = function (test) {
+exports['Define and execute block verb returning false skipping fail'] = function (test) {
     test.async();
     
     var dsl = sdsl.dsl();
     
     dsl
-		.define('false', function (cmd, cb) { cb(null, false); }, { composite: true })
+		.define('false', function (cmd, cb) { cb(null, false); }, { block: true })
 		.define('fail', function (cmd, cb) { test.fail(); })
 		.define('end', { close: true })
 		.define('one', function (cmd, cb) { cb(null, 1); });
