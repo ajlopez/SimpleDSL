@@ -138,7 +138,7 @@ exports['Receives command with arguments and tabs'] = function (test) {
         cb(null, 1); 
     });
     
-dsl.execute('\tfoo\targ1\targ2\t', function (err, data) {
+	dsl.execute('\tfoo\targ1\targ2\t', function (err, data) {
         test.equal(err, null);
         test.equal(data, 1);
         test.done();

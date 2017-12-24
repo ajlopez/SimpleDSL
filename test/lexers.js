@@ -20,6 +20,16 @@ exports['get tokens'] = function (test) {
 	test.equal(tokens[1], 'bar');
 };
 
+exports['get no token'] = function (test) {
+	var lexer = lexers.lexer();
+	
+	var tokens = lexer.getTokens('');
+	
+	test.ok(tokens);
+	test.ok(Array.isArray(tokens));
+	test.equal(tokens.length, 0);
+};
+
 exports['get tokens with spaces'] = function (test) {
 	var lexer = lexers.lexer();
 	
