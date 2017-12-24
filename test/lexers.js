@@ -20,6 +20,18 @@ exports['get tokens'] = function (test) {
 	test.equal(tokens[1], 'bar');
 };
 
+exports['get tokens with expression in parentheses'] = function (test) {
+	var lexer = lexers.lexer();
+	
+	var tokens = lexer.getTokens('foo (bar zoo)');
+	
+	test.ok(tokens);
+	test.ok(Array.isArray(tokens));
+	test.equal(tokens.length, 2);
+	test.equal(tokens[0], 'foo');
+	test.equal(tokens[1], '(bar zoo)');
+};
+
 exports['get no token'] = function (test) {
 	var lexer = lexers.lexer();
 	
