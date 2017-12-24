@@ -145,28 +145,6 @@ exports['Receives command with arguments and tabs'] = function (test) {
     });
 }
 
-exports['Receives command with JSON argument'] = function (test) {
-    test.async();
-    
-    var dsl = sdsl.dsl({ delimiter: ';' });
-    
-    dsl.define('foo', function (cmd, cb) { 
-        test.ok(cmd);
-        test.ok(cmd.verb());
-        test.equal(cmd.verb(), 'foo');
-        test.ok(cmd.arguments());
-        test.equal(cmd.arguments().length, 1);
-        test.deepEqual(cmd.arguments()[0], { name: 'Adam', age: 800 });
-        cb(null, 1); 
-    });
-    
-    dsl.execute('foo { name: "Adam", age: 800 }', function (err, data) {
-        test.equal(err, null);
-        test.equal(data, 1);
-        test.done();
-    });
-}
-
 exports['Logs command with arguments'] = function (test) {
     test.async();
     
