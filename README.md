@@ -38,6 +38,7 @@ TBD
 - 0.0.1 Published
 - 0.0.2 Published, process JSON argument in verb
 - 0.0.3 Tabs as separator, additional data in command (full text, arguments text)
+- 0.0.4 Lexer, expressions in parenthesis
 
 ## License
 
