@@ -58,14 +58,36 @@ exports['get tokens with string'] = function (test) {
 exports['get tokens with argument delimiter'] = function (test) {
 	var lexer = lexers.lexer({ delimiter: ';'});
 	
-	var tokens = lexer.getTokens('foo  one ; two; three');
+	var tokens = lexer.getTokens('foo  one ; two more; three');
 	
 	test.ok(tokens);
 	test.ok(Array.isArray(tokens));
 	test.equal(tokens.length, 4);
 	test.equal(tokens[0], 'foo');
 	test.equal(tokens[1], 'one');
-	test.equal(tokens[2], 'two');
+	test.equal(tokens[2], 'two more');
 	test.equal(tokens[3], 'three');
+};
+
+exports['no tokens with comment'] = function (test) {
+	var lexer = lexers.lexer({ comment: '#'});
+	
+	var tokens = lexer.getTokens('# this is a comment');
+	
+	test.ok(tokens);
+	test.ok(Array.isArray(tokens));
+	test.equal(tokens.length, 0);
+};
+
+exports['two tokens with comment'] = function (test) {
+	var lexer = lexers.lexer({ comment: '#'});
+	
+	var tokens = lexer.getTokens('foo bar# this is a comment');
+	
+	test.ok(tokens);
+	test.ok(Array.isArray(tokens));
+	test.equal(tokens.length, 2);
+	test.equal(tokens[0], 'foo');
+	test.equal(tokens[1], 'bar');
 };
 
