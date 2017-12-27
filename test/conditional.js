@@ -52,3 +52,32 @@ exports['Define and execute conditional verb returning false skipping fail'] = f
     });
 }
 
+exports['Execute else'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+	
+	var done = false;
+    
+    dsl
+		.define('false', function (cmd, cb) { cb(null, false); }, { conditional: true })
+		.define('fail', function (cmd, cb) { test.fail(); })
+		.define('end', { close: true })
+		.define('done', function (cnd, cb) { done = true; cb(null, null) })
+		.define('else', { else: true });
+
+	dsl.execute(
+		[ 
+			'false', 
+				'fail', 
+			'else',
+				'done',
+			'end'
+		], function (err, data) {
+			test.equal(err, null);
+			test.equal(data, null);
+			test.ok(done);
+			test.done();
+    });
+}
+
