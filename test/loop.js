@@ -66,3 +66,35 @@ exports['Define and execute loop verb many times until break'] = function (test)
     });
 }
 
+exports['Define and execute loop verb many times with a continue'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+	
+	var x = 0;
+	var y = 0;
+    
+    dsl
+		.define('while', function (cmd, cb) { cb(null, eval(cmd.argumentsText())); }, { loop: true })
+		.define('if', function (cmd, cb) { cb(null, eval(cmd.argumentsText())); }, { conditional: true })
+		.define('eval', function (cmd, cb) { cb(null, eval(cmd.argumentsText())); })
+		.define('continue', { continue: true })
+		.define('end', { close: true });
+
+	dsl.execute(
+		[
+			'while x < 10',
+				'eval x++', 
+				'if x == 5',
+					'continue',
+				'end',
+				'eval y++', 
+			'end'			
+		], function (err, data) {
+			test.equal(err, null);
+			test.equal(x, 10);
+			test.equal(9, 9);
+			test.done();
+    });
+}
+
