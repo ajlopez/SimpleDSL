@@ -54,17 +54,30 @@ exports['get tokens with spaces'] = function (test) {
 	test.equal(tokens[1], 'bar');
 };
 
-exports['get tokens with string'] = function (test) {
+exports['get tokens with string delimited by double quotes'] = function (test) {
 	var lexer = lexers.lexer();
 	
-	var tokens = lexer.getTokens('foo  bar "zoo"');
+	var tokens = lexer.getTokens('foo  bar "big zoo"');
 	
 	test.ok(tokens);
 	test.ok(Array.isArray(tokens));
 	test.equal(tokens.length, 3);
 	test.equal(tokens[0], 'foo');
 	test.equal(tokens[1], 'bar');
-	test.equal(tokens[2], '"zoo"');
+	test.equal(tokens[2], '"big zoo"');
+};
+
+exports['get tokens with string delimited by single quotes'] = function (test) {
+	var lexer = lexers.lexer();
+	
+	var tokens = lexer.getTokens("foo  bar 'big zoo'");
+	
+	test.ok(tokens);
+	test.ok(Array.isArray(tokens));
+	test.equal(tokens.length, 3);
+	test.equal(tokens[0], 'foo');
+	test.equal(tokens[1], 'bar');
+	test.equal(tokens[2], "'big zoo'");
 };
 
 exports['get tokens with argument delimiter'] = function (test) {
