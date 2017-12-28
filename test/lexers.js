@@ -32,6 +32,19 @@ exports['get tokens one verb and only one argument'] = function (test) {
 	test.equal(tokens[1], 'this is an argument');
 };
 
+exports['get tokens one verb and only two argument'] = function (test) {
+	var lexer = lexers.lexer();
+	
+	var tokens = lexer.getTokens('foo this is an argument', 2);
+	
+	test.ok(tokens);
+	test.ok(Array.isArray(tokens));
+	test.equal(tokens.length, 3);
+	test.equal(tokens[0], 'foo');
+	test.equal(tokens[1], 'this');
+	test.equal(tokens[2], 'is an argument');
+};
+
 exports['get tokens with expression in parentheses'] = function (test) {
 	var lexer = lexers.lexer();
 	
