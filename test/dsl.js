@@ -55,6 +55,29 @@ exports['Define and execute verb with arguments'] = function (test) {
     });
 }
 
+exports['Define and execute verb with arguments in multiline'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+    
+    dsl
+		.define('foo', function (cmd, cb) { cb(null, cmd.arguments()); })
+		.define('{{{', { multiline: '}}}' });
+		
+    dsl.execute([
+			'{{{',
+				'foo',
+				'one',
+				'two',
+				'three',
+			'}}}'
+		], function (err, data) {
+        test.equal(err, null);
+        test.deepEqual(data, ['one', 'two', 'three']);
+        test.done();
+    });
+}
+
 exports['Define and execute verb with two arguments'] = function (test) {
     test.async();
     
