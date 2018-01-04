@@ -42,6 +42,19 @@ exports['Define and execute verb'] = function (test) {
     });
 }
 
+exports['Define and execute verb with function that raise exception'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+    
+    dsl.define('foo', function (cmd, cb) { throw "error"; });
+    dsl.execute('foo', function (err, data) {
+        test.equal(err, "error");
+        test.ok(!data);
+        test.done();
+    });
+}
+
 exports['Define and execute verb with arguments'] = function (test) {
     test.async();
     
