@@ -1,7 +1,7 @@
 { "name": "simpledsl"
 , "description": "Simple DSL (Domain-Specific Language) base library"
 , "keywords": [ "dsl", "browser", "nodejs" ]
-, "version": "0.0.5"
+, "version": "0.0.6"
 , "author": "Angel 'Java' Lopez <webmaster@ajlopez.com> (http://www.ajlopez.com)"
 , "repository": { "type": "git", "url": "git://github.com/ajlopez/SimpleDSL.git" }
 , "main": "./lib/simpledsl.js"

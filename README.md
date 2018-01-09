@@ -40,6 +40,7 @@ TBD
 - 0.0.3 Tabs as separator, additional data in command (full text, arguments text)
 - 0.0.4 Lexer, expressions in parenthesis
 - 0.0.5 Published, number of arguments, multiline verb, string in single quotes, else command
+- 0.0.6 Published, catch exceptions in functions, fail command
 
 ## License
 
