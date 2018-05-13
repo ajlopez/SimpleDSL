@@ -24,3 +24,25 @@ exports['Define and execute verb with post function'] = function (test) {
         test.done();
     });
 }
+
+exports['Define and execute fail with error using postfn'] = function (test) {
+    test.async();
+    
+    var dsl = sdsl.dsl();
+    
+    dsl
+		.define('fail', { block: true, postfn: function (err, data, cb) {
+			if (!err)
+				return cb(new Error("expected error"), null);
+			
+			cb(null, err);
+		}})
+		.define('error', function (cmd, cb) { cb('error', null); })
+		.define('end', { close: true });
+
+	dsl.execute([ 'fail', 'error', 'end' ], function (err, data) {
+        test.equal(err, null);
+		test.equal(data, 'error');
+        test.done();
+    });
+}
