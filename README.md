@@ -41,6 +41,7 @@ TBD
 - 0.0.4 Lexer, expressions in parenthesis
 - 0.0.5 Published, number of arguments, multiline verb, string in single quotes, else command
 - 0.0.6 Published, catch exceptions in functions, fail command
+- 0.0.7 Published, post function in verb
 
 ## License
 
