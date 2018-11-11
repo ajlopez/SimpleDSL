@@ -101,6 +101,17 @@ exports['get tokens with string delimited by double quotes'] = function (test) {
 	test.equal(tokens[2], '"big zoo"');
 };
 
+exports['get string delimited by double quotes and new lines carriage returns'] = function (test) {
+	var lexer = lexers.lexer('"big\r\nzoo"');
+	
+	var tokens = lexer.getTokens();
+	
+	test.ok(tokens);
+	test.ok(Array.isArray(tokens));
+	test.equal(tokens.length, 1);
+	test.equal(tokens[0], '"big\r\nzoo"');
+};
+
 exports['get tokens with string delimited by single quotes'] = function (test) {
 	var lexer = lexers.lexer("foo  bar 'big zoo'");
 	
